@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import useSWR from "swr";
+import { useNavigate } from "react-router-dom";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -12,11 +13,19 @@ function GenerateQuizForm() {
     const [amount, setAmount] = useState(10);
     const [type, setType] = useState("multiple");
 
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const query = `https://the-trivia-api.com/api/questions?categories=${category}&limit=${amount}&difficulty=${difficulty}&type=${type}`;
         console.log("Generated API Query:", query);
-        // Optional: You can fetch or route with this query here
+
+        // Navigate to /quiz with query as state
+        navigate("/quiz", {
+            state: {
+                apiUrl: query
+            }
+        });
     };
 
     if (error) return <div>Failed to load</div>;
@@ -68,6 +77,7 @@ function GenerateQuizForm() {
                 </select>
             </label>
 
+            {/* Remove Link. Let the button handle navigation */}
             <Button text="Generate" onClickHandler={handleSubmit} />
         </form>
     );
