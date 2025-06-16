@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Button from "./Button";
 import useSWR from "swr";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 function GenerateQuizForm() {
     const { data, error } = useSWR("https://the-trivia-api.com/api/categories", fetcher);
 
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("sport");
     const [difficulty, setDifficulty] = useState("easy");
     const [amount, setAmount] = useState(10);
     const [type, setType] = useState("multiple");
@@ -18,7 +18,7 @@ function GenerateQuizForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const query = `https://the-trivia-api.com/api/questions?categories=${category}&limit=${amount}&difficulty=${difficulty}&type=${type}`;
-        console.log("Generated API Query:", query);
+        // console.log("Generated API Query:", query);
 
         // Navigate to /quiz with query as state
         navigate("/quiz", {
@@ -27,6 +27,15 @@ function GenerateQuizForm() {
             }
         });
     };
+
+    useEffect(() => {
+        if (data && !Object.values(data).flat().includes(category)) {
+            const firstGroup = Object.values(data)[0];
+            if (firstGroup && firstGroup.length > 0) {
+                setCategory(firstGroup[0]);
+            }
+        }
+    }, [data]);
 
     if (error) {
         return (
@@ -80,32 +89,32 @@ function GenerateQuizForm() {
                     <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-6 sm:space-y-8">
                         {/* Category Selection */}
                         <div className="space-y-3">
-                            <label className="flex items-center text-base sm:text-lg font-semibold text-gray-800">
-                                <span className="mr-2">📚</span>
-                                Select Category
-                            </label>
-                            <div className="relative">
-                                <select 
-                                    className="w-full p-3 sm:p-4 border-2 border-gray-200 rounded-xl text-sm sm:text-base focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200 appearance-none bg-white cursor-pointer hover:border-gray-400"
-                                    onChange={(e) => setCategory(e.target.value)}
-                                    value={category}
-                                >
-                                    <option value="">Choose a category...</option>
-                                    {Object.entries(data).map(([group, subcategories]) =>
-                                        subcategories.map((subcategory) => (
-                                            <option key={subcategory} value={subcategory}>
-                                                {subcategory} ({group})
-                                            </option>
-                                        ))
-                                    )}
-                                </select>
-                                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
+            <label className="flex items-center text-base sm:text-lg font-semibold text-gray-800">
+                <span className="mr-2">📚</span>
+                Select Category
+            </label>
+            <div className="relative">
+                <select 
+                    className="w-full p-3 sm:p-4 border-2 border-gray-200 rounded-xl text-sm sm:text-base focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200 appearance-none bg-white cursor-pointer hover:border-gray-400"
+                    onChange={(e) => setCategory(e.target.value)}
+                    value={category}
+                >
+                    <option value="">Choose a category...</option>
+                    {Object.entries(data).map(([group, subcategories]) =>
+                        subcategories.map((subcategory) => (
+                            <option key={subcategory} value={subcategory}>
+                                {subcategory} ({group})
+                            </option>
+                        ))
+                    )}
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+            </div>
+        </div>
 
                         {/* Difficulty Selection */}
                         <div className="space-y-3">
