@@ -30,7 +30,7 @@ function QuizHomePage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-purple-100">
         {/* Hero Section */}
         <header className="px-4 py-8 sm:py-12 lg:py-16">
           <div className="max-w-4xl mx-auto text-center">
@@ -77,7 +77,7 @@ function QuizHomePage() {
               {categories.map((cat, index) => (
                 <div
                   key={index}
-                  className="group cursor-pointer rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300 bg-white border border-gray-100"
+                  className="group cursor-pointer rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300 bg-white border border-white hover:border-purple-600"
                 >
                   <div className="relative overflow-hidden">
                     <img 

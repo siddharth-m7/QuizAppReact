@@ -7,7 +7,7 @@ function AboutPage() {
   return (
     <>
     <Navbar />
-    <main className="min-h-screen">
+    <main className="bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen">
       <AboutProject />
       <AboutDeveloper />
     </main>

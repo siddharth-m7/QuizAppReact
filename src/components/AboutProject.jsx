@@ -3,7 +3,7 @@ import React from "react";
 // About Project Component
 function AboutProject() {
   return (
-    <section className="bg-white py-16 px-4">
+    <section className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">About QuizHub</h2>
