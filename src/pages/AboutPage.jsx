@@ -1,4 +1,3 @@
-import React from 'react';
 import AboutProject from '../components/AboutProject';
 import AboutDeveloper from '../components/AboutDeveloper';
 import Navbar from '../components/Navbar';
