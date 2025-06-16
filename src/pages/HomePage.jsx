@@ -2,17 +2,28 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import art from "../assets/images/art.jpg";
+import film from "../assets/images/film.jpg";
+import food from "../assets/images/food.jpg";
+import general from "../assets/images/general.webp";
+import geography from "../assets/images/geography.jpg";
+import history from "../assets/images/history.jpg";
+import science from "../assets/images/science.jpg";
+import society from "../assets/images/society.jpg";
+import sport from "../assets/images/sport.jpg";
+
+
 
 const categories = [
-  { name: "Arts & Literature", image: "/images/science.jpg" },
-  { name: "Film & TV", image: "/images/history.jpg" },
-  { name: "Food & Drink", image: "/images/geography.jpg" },
-  { name: "General Knowledge", image: "/images/music.jpg" },
-  { name: "Geography", image: "/images/sports.jpg" },
-  { name: "History", image: "/images/film.jpg" },
-  { name: "Science", image: "/images/literature.jpg" },
-  { name: "Society & Culture", image: "/images/food.jpg" },
-  { name: "Sport & Leisure", image: "/images/art.jpg" },
+  { name: "Arts & Literature", image: art },
+  { name: "Film & TV", image: film },
+  { name: "Food & Drink", image: food },
+  { name: "General Knowledge", image: general },
+  { name: "Geography", image: geography},
+  { name: "History", image: history },
+  { name: "Science", image: science },
+  { name: "Society & Culture", image: society },
+  { name: "Sport & Leisure", image: sport },
 ];
 
 function QuizHomePage() {
@@ -59,9 +70,7 @@ function QuizHomePage() {
                 <span className="mr-2">📚</span>
                 Choose Your Category
               </h2>
-              <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto">
-                Select from our carefully curated topics or dive into a random challenge
-              </p>
+              
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
@@ -74,12 +83,12 @@ function QuizHomePage() {
                     <img 
                       src={cat.image} 
                       alt={cat.name} 
-                      className="h-40 sm:h-48 w-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                      className="h-60 sm:h-60 w-full object-cover group-hover:scale-110 transition-transform duration-500" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                   <div className="p-4 sm:p-6">
-                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 text-center group-hover:text-purple-600 transition-colors duration-200">
+                    <h3 className="text-lg sm:text-lg font-semibold text-gray-900 text-center group-hover:text-purple-600 transition-colors duration-200">
                       {cat.name}
                     </h3>
                   </div>
