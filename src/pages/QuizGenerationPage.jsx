@@ -1,10 +1,13 @@
 import GenerateQuizForm from '../components/GenerateQuizForm';
+import Navbar from '../components/Navbar';
 function QuizPage(params) {
     return (
+    <>
+        <Navbar />
         <div>
-            <h1>Quiz Page</h1>
             <GenerateQuizForm />
         </div>
+    </>
     );
 }
 

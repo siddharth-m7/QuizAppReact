@@ -1,19 +1,24 @@
 import useSWR from "swr";
+import { useLocation } from "react-router-dom";
+import DisplayQuizQuestion from "../components/DisplayQuizQuestion";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
+function QuizDisplayPage() {
+    const location = useLocation();
+    console.log(location.state.apiUrl);
+    const apiUrl = location.state.apiUrl || "https://the-trivia-api.com/api/questions?categories=General Knowledge&limit=10&difficulty=easy&type=multiple";
 
-function QuizDisplayPage(){
+    const { data, error } = useSWR(apiUrl, fetcher);
 
-    const { data, error } = useSWR("https://the-trivia-api.com/api/categories", fetcher);
-    if (error) return <div>Failed to load</div>;
-    if (!data) return <div>Loading...</div>;
+    if (error) return <div>Failed to load quiz data</div>;
+    if (!data) return <div>Loading quiz...</div>;
+    if (data) console.log(data);
 
     return (
         <div className="quiz-display-page">
-        <h1>Quiz Display Page</h1>
-        <p>This is where the quiz will be displayed.</p>
-        {/* Additional components and logic for displaying the quiz can be added here */}
+        <DisplayQuizQuestion data={data}/>
+    
         </div>
     );
 
